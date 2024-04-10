@@ -5,9 +5,9 @@ export const getGlobalData = () => {
   const blogTitle = process.env.BLOG_TITLE
     ? decodeURI(process.env.BLOG_TITLE)
     : 'Conocenos';
-  const footerText = process.env.BLOG_FOOTER_TEXT
+    const footerText = process.env.BLOG_FOOTER_TEXT
     ? decodeURI(process.env.BLOG_FOOTER_TEXT)
-    : 'https://linktr.ee/maya_airways';
+    : '';
 
   return {
     name,
