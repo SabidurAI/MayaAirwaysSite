@@ -6,19 +6,12 @@ import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
 
 export default function ProjectsPage() {
-  // Define your project images here
-  const projectImages = [
-    'https://github.com/SabidurAI/MayaAirwaysSite/assets/36314124/b79068d2-1991-4cca-bbb0-52cc934daacf',
-    'https://github.com/SabidurAI/MayaAirwaysSite/assets/36314124/4912eac3-25f2-47d6-b6f7-db4e1ab68bbc',
-    'https://github.com/SabidurAI/MayaAirwaysSite/assets/36314124/d7c2d931-ea2a-4c4e-bb8e-849679d7f49',
-    // Add more images as needed
-  ];
   const globalData = getGlobalData()
   return (
     <Layout>
       <SEO title={globalData.name} description={globalData.blogTitle} />
       <Header name={globalData.name} />
-      <Carousel images={projectImages} />
+      <Carousel googleSheetUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqADBj2MZroHM0PC2WDCJ51Za_0Meq9MkNvVPZPm13ljcudVZBKE5W0Th345EsQzrNcO-ujwy6qpYJ/pub?output=csv" />
       <Footer copyrightText={globalData.footerText} />
       <GradientBackground
         variant="large"

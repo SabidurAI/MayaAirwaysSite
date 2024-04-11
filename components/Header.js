@@ -17,7 +17,7 @@ export default function Header({ name }) {
           <Link href="/posts/About-Us" legacyBehavior>
             <a className="text-white hover:text-gray-300">Conocenos</a>
           </Link>
-          <Link href="/posts/Nuestras-Bicicletas" legacyBehavior>
+          <Link href="/project" legacyBehavior>
             <a className="text-white hover:text-gray-300">Nuestras Bicicletas</a>
           </Link>
           {/* Add more navigation links as needed */}
