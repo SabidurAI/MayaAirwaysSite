@@ -20,6 +20,12 @@ export default function Header({ name }) {
           <Link href="/project" legacyBehavior>
             <a className="text-white hover:text-gray-300">Nuestras Bicicletas</a>
           </Link>
+          <Link href="/" legacyBehavior>
+            <a className="text-white hover:text-gray-300">FAQ</a>
+          </Link>
+          <Link href="/" legacyBehavior>
+            <a className="text-white hover:text-gray-300">Donaciones</a>
+          </Link>
           {/* Add more navigation links as needed */}
         </nav>
       </header>
