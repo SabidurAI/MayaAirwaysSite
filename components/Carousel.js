@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, CardContent, CardMedia, Button, Typography } from '@mui/material';
 import Papa from 'papaparse';
 
 export default function Carousel({ googleSheetUrl }) {
@@ -41,19 +41,33 @@ export default function Carousel({ googleSheetUrl }) {
 
   return (
     <div className="carousel">
-      
       {projects.length > 0 && (
-        <Card style={{ width: '18rem' }}>
-          <Card.Img variant="top" src={projects[currentIndex].image_url} alt={`Project ${currentIndex + 1}`} />
-          <Card.Body>
-            <Card.Title>{projects[currentIndex].image_name}</Card.Title>
-            <Card.Text>{projects[currentIndex].description}</Card.Text>
-          </Card.Body>
-        </Card>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <Card style={{ backgroundColor: 'transparent' }}>
+            <CardMedia
+              component="img"
+              height="140"
+              image={projects[currentIndex].image_url}
+              alt={`Project ${currentIndex + 1}`}
+              style={{ backgroundColor: 'transparent' }}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {projects[currentIndex].image_name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {projects[currentIndex].description}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
       )}
-      <button onClick={handlePrev}>Previous</button>
-      <br/>
-      <button onClick={handleNext}>Next</button>
+      <Button onClick={handlePrev} variant="contained" color="primary">
+        Anterior
+      </Button>
+      <Button onClick={handleNext} variant="contained" color="primary">
+        Siguiente
+      </Button>
     </div>
   );
 }

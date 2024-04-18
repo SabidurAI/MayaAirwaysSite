@@ -1,34 +1,56 @@
-import Link from 'next/link';
+import React from 'react';
+import ReactiveAppBar from './ReactiveAppBar.js';
 
 export default function Header({ name }) {
   return (
     <div>
-      <header className="flex items-center justify-between px-4 py-3 bg-gray-800 text-white">
-        <div align="center">
-          <img alt="maya" src="https://github.com/SabidurAI/MayaAirwaysSite/assets/36314124/4912eac3-25f2-47d6-b6f7-db4e1ab68bbc" height="50" width="50" />
-        </div>
-        <div>
-          <h1 className="text-xl font-bold">{name}</h1>
-        </div>
-        <nav className="space-x-4">
-          <Link href="/" legacyBehavior>
-            <a className="text-white hover:text-gray-300">Home</a>
-          </Link>
-          <Link href="/posts/About-Us" legacyBehavior>
-            <a className="text-white hover:text-gray-300">Conocenos</a>
-          </Link>
-          <Link href="/project" legacyBehavior>
-            <a className="text-white hover:text-gray-300">Nuestras Bicicletas</a>
-          </Link>
-          <Link href="/" legacyBehavior>
-            <a className="text-white hover:text-gray-300">FAQ</a>
-          </Link>
-          <Link href="/" legacyBehavior>
-            <a className="text-white hover:text-gray-300">Donaciones</a>
-          </Link>
-          {/* Add more navigation links as needed */}
-        </nav>
-      </header>
-    </div>
+  <ReactiveAppBar/>
+  </div>
+  
+    /* <AppBar position="static">
+      <Toolbar>
+        <Grid container alignItems="center" justify="space-between">
+          <Grid item>
+            <Grid container alignItems="center" spacing={2}>
+              <Grid item>
+                
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">{name}</Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={2}>
+              <Grid item>
+                <Link href="/" color="inherit">
+                  Home
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/posts/About-Us" color="inherit">
+                  Conocenos
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/project" color="inherit">
+                  Nuestras Bicicletas
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/" color="inherit">
+                  FAQ
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/posts/Donations" color="inherit">
+                  ¿Como ayudar?
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>*/
   );
 }
