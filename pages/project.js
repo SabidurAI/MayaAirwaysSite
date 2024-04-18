@@ -11,6 +11,7 @@ export default function ProjectsPage() {
     <Layout>
       <SEO title={globalData.name} description={globalData.blogTitle} />
       <Header name={globalData.name} />
+      <br/>
       <Carousel googleSheetUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqADBj2MZroHM0PC2WDCJ51Za_0Meq9MkNvVPZPm13ljcudVZBKE5W0Th345EsQzrNcO-ujwy6qpYJ/pub?output=csv" />
       <Footer copyrightText={globalData.footerText} />
       <GradientBackground

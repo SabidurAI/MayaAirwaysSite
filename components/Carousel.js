@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardMedia, Button, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Button, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Papa from 'papaparse';
 
 export default function Carousel({ googleSheetUrl }) {
@@ -7,6 +7,7 @@ export default function Carousel({ googleSheetUrl }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedProject, setSelectedProject] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,14 +37,32 @@ export default function Carousel({ googleSheetUrl }) {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? projects.length - 1 : prevIndex - 1));
   };
 
+  const handleSelectChange = (event) => {
+    setSelectedProject(event.target.value);
+    setCurrentIndex(projects.findIndex(project => project.image_name === event.target.value));
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="carousel">
+    <div className="carousel" style={{ paddingTop: '20px' }}>
       {projects.length > 0 && (
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <Card style={{ backgroundColor: 'transparent' }}>
+        <div style={{ maxWidth: '800px', margin: '10 auto' }}>
+          <FormControl fullWidth>
+            <InputLabel id="project-select-label" style={{ paddingTop: '10px' }}>Seleccionar una Bicicleta</InputLabel>
+            <Select
+              labelId="project-select-label"
+              id="project-select"
+              value={selectedProject}
+              onChange={handleSelectChange}
+            >
+              {projects.map((project, index) => (
+                <MenuItem key={index} value={project.image_name}>{project.image_name}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Card style={{ backgroundColor: 'transparent', marginTop: '20px' }}>
             <CardMedia
               component="img"
               height="140"
@@ -62,10 +81,10 @@ export default function Carousel({ googleSheetUrl }) {
           </Card>
         </div>
       )}
-      <Button onClick={handlePrev} variant="contained" color="primary">
+      <Button onClick={handlePrev} variant="contained" color="primary" style={{ marginTop: '20px' }}>
         Anterior
       </Button>
-      <Button onClick={handleNext} variant="contained" color="primary">
+      <Button onClick={handleNext} variant="contained" color="primary" style={{ marginTop: '20px', marginLeft: '10px' }}>
         Siguiente
       </Button>
     </div>
