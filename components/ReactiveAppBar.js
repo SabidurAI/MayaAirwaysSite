@@ -31,7 +31,7 @@
         <AppBar position="static" sx={{ backgroundColor: '#02067a'}}>
         <Container maxWidth="xl">
             <Toolbar disableGutters>
-            <img src="https://github.com/SabidurAI/MayaAirwaysSite/blob/main/imagenes/S_Maya_A.png?raw=true" alt="Maya Logo" style={{ height: '50px', width: 'auto' }} />
+            <img src="https://github.com/SabidurAI/MayaAirwaysSite/blob/main/imagenes/fill%20blanco.png?raw=true" alt="Maya Logo" style={{ height: '50px', width: 'auto' }} />
             <Typography
                 variant="h6"
                 noWrap
