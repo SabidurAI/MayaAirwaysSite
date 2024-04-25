@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import Layout, { GradientBackground } from '../components/Layout';
 import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
-import { List, ListItem } from '@mui/material';
 
 export default function ProjectsPage() {
   const globalData = getGlobalData()

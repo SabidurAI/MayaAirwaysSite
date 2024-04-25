@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getPosts } from '../utils/mdx-utils';
-
+import { serverSideTranslations} from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'react-i18next';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Layout, { GradientBackground } from '../components/Layout';
@@ -9,6 +10,7 @@ import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
 
 export default function Index({ posts, globalData }) {
+  const { t } = useTranslation('common');
   return (
     <Layout>
       <SEO title={globalData.name} description={globalData.blogTitle} />
@@ -60,8 +62,11 @@ export default function Index({ posts, globalData }) {
 }
 
 export function getStaticProps() {
-  const posts = getPosts();
+  let posts = getPosts();
   const globalData = getGlobalData();
+
+  // Sort posts by date in descending order
+  posts = posts.sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
 
   return { props: { posts, globalData } };
 }
