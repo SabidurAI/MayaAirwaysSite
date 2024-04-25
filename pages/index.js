@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { getPosts } from '../utils/mdx-utils';
-import { serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
