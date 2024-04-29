@@ -10,7 +10,6 @@ import Container from "@mui/material/Container";
 import { Tabs, Tab, useMediaQuery, useTheme } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import TimelineIcon from "@mui/icons-material/Timeline";
-import ContactMailIcon from "@mui/icons-material/ContactMail";
 
 import {
     List,
@@ -39,7 +38,7 @@ function HideOnScroll(props) {
 }
 
 function ResponsiveAppBar(props) {
-    const { t } = useTranslation('appbar')
+    const { t } = useTranslation('common');
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -167,7 +166,7 @@ function ResponsiveAppBar(props) {
                                                     >
                                                         <p>
                                                             {" "}
-                                                            <InfoIcon /> {t("Conocenos")}
+                                                            <InfoIcon /> {t('testAbout')}
                                                         </p>
                                                     </Link>
                                                 }
@@ -189,7 +188,7 @@ function ResponsiveAppBar(props) {
                                                                 color: "white",
                                                             }}
                                                         >
-                                                            <TimelineIcon /> {t("Nuestras Biciletas")}
+                                                            <TimelineIcon /> {t('Nuestras_Bicicletas')}
                                                         </Link>
                                                     </p>
                                                 }
@@ -201,7 +200,7 @@ function ResponsiveAppBar(props) {
                                                 value="one"
                                                 label={
                                                     <p>
-                                                        <Home /> {t('¿Quiere Ayudar?')}
+                                                        <Home /> {t('¿Quiere_ayudar?')}
                                                     </p>
                                                 }
                                                 onClick={() => {
@@ -250,8 +249,8 @@ function ResponsiveAppBar(props) {
                                                 <InfoIcon />
                                             </ListItemIcon>
                                             <Link
-                                                href="/posts/About-US"
-                                                style={{ textDecoration: "none", color: "white" }}
+                                                href="/posts/About-Us"
+                                                
                                             >
                                                 <ListItemText
                                                     onClick={handleCloseNavMenu}
@@ -265,7 +264,6 @@ function ResponsiveAppBar(props) {
                                             </ListItemIcon>
                                             <Link
                                                 href="/project"
-                                                style={{ textDecoration: "none", color: "white" }}
                                             >
                                                 <ListItemText
                                                     onClick={handleCloseNavMenu}
