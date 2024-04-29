@@ -4,7 +4,7 @@ export const getGlobalData = () => {
     : 'maya airways';
   const blogTitle = process.env.BLOG_TITLE
     ? decodeURI(process.env.BLOG_TITLE)
-    : 'Conocenos';
+    : 'maya airways';
     const footerText = process.env.BLOG_FOOTER_TEXT
     ? decodeURI(process.env.BLOG_FOOTER_TEXT)
     : '';

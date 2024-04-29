@@ -5,15 +5,18 @@ import Layout, { GradientBackground } from '../components/Layout';
 import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
 import Image from 'next/image';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 export default function ProjectsPage() {
-  const globalData = getGlobalData()
+  const globalData = getGlobalData();
+  const { t } = useTranslation('project')
   return (
     <Layout>
       <SEO title={globalData.name} description={globalData.blogTitle} />
       <Header name={globalData.name} />
       {/**<h1>Lo que hemos hecho hasta ahora</h1>*/}
-      Bicicletas armadas hasta ahora
+      {t('title')}
       <br />
       <Image 
       src="/imagenes/proj.jpg" 
@@ -21,26 +24,25 @@ export default function ProjectsPage() {
       width={1000}
       height={1000}
       />
-      Hay tres series de bicicletas:
+      {t('subt1')}
       <ul>
-        <li><b>Bourdieu:</b> bicicletas armadas con repuestos nuevos.</li>
-        <li><b>Fénix:</b> bicicletas restauradas (según el caso, con repuestos usados y nuevos).</li>
-        <li><b>Wollstonecraft:</b> bicicletas armadas con piezas usadas (y algunas nuevas).</li>
+        <li><b>Bourdieu:</b> {t('Bourdieu')}</li>
+        <li><b>Fénix:</b> {t('Fénix')}</li>
+        <li><b>Wollstonecraft:</b> {t('Wollstonecraft')}</li>
       </ul>
       <Image src="/imagenes/actual.png" alt="colage de bicicletas" 
       width={1000}
       height={1000}
       />
-      <a href="https://www.flickr.com/photos/sabidurai/albums">Colección fotográfica completa acá</a> -
+      <a href="https://www.flickr.com/photos/sabidurai/albums">{t('foto_gallery')}</a> -
       <a href="https://bit.ly/maya-air-photos">https://bit.ly/maya-air-photos</a>
       <br />
 
-      Mientras se entregan, algunas de las bicicletas son exhibidas en las tiendas de Moovil y en Bicihangar.
+      {t('par1')}
 
-      Todas las bicicletas tienen un escudo de Garage 529 para registrarse en ese sistema de seguimiento de bicicletas, que complementa el Registro Bici de Bogotá.
-
-      <h2>La flota hasta ahora</h2>
+      <h2>{t('subt2')}</h2>
       <br />
+      {/*TODO locale carusel*/}
       <Carousel googleSheetUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqADBj2MZroHM0PC2WDCJ51Za_0Meq9MkNvVPZPm13ljcudVZBKE5W0Th345EsQzrNcO-ujwy6qpYJ/pub?output=csv" />
       <Footer copyrightText={globalData.footerText} />
       <GradientBackground
@@ -53,4 +55,14 @@ export default function ProjectsPage() {
       />
     </Layout>
   );
+}
+export async function getStaticProps({locale}) {
+  
+  const globalData = getGlobalData();
+
+  return {props: {
+    ...(await serverSideTranslations(locale, ['project', 'common',])),
+    globalData,
+  },
+ };
 }
