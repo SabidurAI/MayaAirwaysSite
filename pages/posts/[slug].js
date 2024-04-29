@@ -13,6 +13,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout, { GradientBackground } from '../../components/Layout';
 import SEO from '../../components/SEO';
+import { useTranslation } from 'next-i18next';
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
@@ -31,6 +32,7 @@ export default function PostPage({
   frontMatter,
   globalData,
 }) {
+  const { t } = useTranslation('posts');
   return (
     <Layout>
       <SEO
@@ -41,10 +43,10 @@ export default function PostPage({
       <article className="px-6 md:px-0">
         <header>
           <h1 className="text-3xl md:text-5xl dark:text-white text-center mb-12">
-            {frontMatter.title}
+            {t(frontMatter.title)}
           </h1>
           {frontMatter.description && (
-            <p className="text-xl mb-4">{frontMatter.description}</p>
+            <p className="text-xl mb-4">{t(frontMatter.description)}</p>
           )}
         </header>
         <main>
@@ -67,11 +69,12 @@ export default function PostPage({
   );
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params, locale }) => {
   const globalData = getGlobalData();
-  const { mdxSource, data } = await getPostBySlug(params.slug);
-  const prevPost = getPreviousPostBySlug(params.slug);
-  const nextPost = getNextPostBySlug(params.slug);
+  // Fetch post data based on locale
+  const { mdxSource, data } = await getPostBySlug(params.slug, locale);
+  const prevPost = getNextPostBySlug(params.slug, locale);
+  const nextPost = getPreviousPostBySlug(params.slug, locale);
 
   return {
     props: {
@@ -84,12 +87,14 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
-export const getStaticPaths = async () => {
-  const paths = postFilePaths
-    // Remove file extensions for page paths
-    .map((path) => path.replace(/\.mdx?$/, ''))
-    // Map the path into the static paths object required by Next.js
-    .map((slug) => ({ params: { slug } }));
+export const getStaticPaths = async ({ locales }) => {
+  const paths = [];
+  for (const locale of locales) {
+    const localePaths = postFilePaths
+      .map((path) => path.replace(/\.mdx?$/, ''))
+      .map((slug) => ({ params: { slug }, locale }));
+    paths.push(...localePaths);
+  }
 
   return {
     paths,

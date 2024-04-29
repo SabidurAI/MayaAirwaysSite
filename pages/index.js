@@ -7,10 +7,12 @@ import Header from '../components/Header';
 import Layout, { GradientBackground } from '../components/Layout';
 import ArrowIcon from '../components/ArrowIcon';
 import SEO from '../components/SEO';
+import { serverSideTranslations} from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 export default function Index({ posts, globalData }) {
   const [searchTerm, setSearchTerm] = useState('');
-
+  const { t } = useTranslation('common');
   const filteredPosts = posts.filter(post => {
     const title = post.data.title.toLowerCase();
     const description = post.data.description.toLowerCase();
@@ -79,7 +81,7 @@ export default function Index({ posts, globalData }) {
   );
 }
 
-export function getStaticProps() {
+export async function getStaticProps({locale}) {
   let posts = getPosts();
   
   // Sort posts by date by default
@@ -91,5 +93,11 @@ export function getStaticProps() {
 
   const globalData = getGlobalData();
 
-  return { props: { posts, globalData } };
+  return {props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+    posts,
+    globalData,
+  },
+ };
 }
+

@@ -1,109 +1,297 @@
-    import * as React from 'react';
-    import AppBar from '@mui/material/AppBar';
-    import Box from '@mui/material/Box';
-    import Toolbar from '@mui/material/Toolbar';
-    import IconButton from '@mui/material/IconButton';
-    import Typography from '@mui/material/Typography';
-    import Menu from '@mui/material/Menu';
-    import MenuIcon from '@mui/icons-material/Menu';
-    import Container from '@mui/material/Container';
-    import Button from '@mui/material/Button';
-    import MenuItem from '@mui/material/MenuItem';
+import React from "react";
+import Link from "next/link"; // Import the Link component from Next.js
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import { Tabs, Tab, useMediaQuery, useTheme } from "@mui/material";
+import InfoIcon from "@mui/icons-material/Info";
+import TimelineIcon from "@mui/icons-material/Timeline";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
 
-    const pages = [
-        { name: 'Conocenos', href: '/posts/About-Us' },
-        { name: 'Nuestras Bicicletas', href: '/project' },
-        { name: '¿Quiere ayudar?', href: '/posts/Donations' },
-      ];
+import {
+    List,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    Menu,
+} from "@mui/material";
 
-    function ResponsiveAppBar() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
+import { Home } from "@mui/icons-material";
+import Slide from "@mui/material/Slide"; // Import the Slide component from Material-UI
+import useScrollTrigger from "@mui/material/useScrollTrigger"; // Import the useScrollTrigger hook
+import CssBaseline from "@mui/material/CssBaseline";
+import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
+function HideOnScroll(props) {
+    const { children } = props;
+    const trigger = useScrollTrigger();
+
+    return (
+        <Slide appear={false} direction="down" in={!trigger}>
+            {children}
+        </Slide>
+    );
+}
+
+function ResponsiveAppBar(props) {
+    const { t } = useTranslation('appbar')
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
+    const theme = useTheme();
+    console.log(theme);
+    const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+    console.log(isMatch);
+
     return (
-        <AppBar position="static" sx={{ backgroundColor: '#02067a'}}>
-        <Container maxWidth="xl">
-            <Toolbar disableGutters>
-            <img src="https://github.com/SabidurAI/MayaAirwaysSite/blob/main/imagenes/fill%20blanco.png?raw=true" alt="Maya Logo" style={{ height: '50px', width: 'auto' }} />
-            <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-                }}
-            >
-                Maya
-            </Typography>
+        <React.Fragment>
+            <CssBaseline />
+            <HideOnScroll {...props}>
+                <AppBar
+                    className="navbar1"
+                    style={{
+                        width: "93.5%",
+                        right: "3.2%",
+                        border: "2px solid white",
+                        borderRadius: "30px",
+                        background:
+                            "linear-gradient( 90deg, rgba(78, 78, 246, 0.647) 0%, rgba(247, 90, 216, 0.696) 100% )",
+                    }}
+                >
+                    <Container maxWidth="xl">
+                        <Toolbar disableGutters>
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="a"
+                                href="/"
+                                sx={{
+                                    mr: 2,
+                                    display: { xs: "none", md: "flex" },
+                                    fontFamily: "monospace",
+                                    fontWeight: 700,
+                                    letterSpacing: ".3rem",
+                                    color: "inherit",
+                                    textDecoration: "none",
+                                }}
+                                className="cursorp"
+                            >
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-                >
-                <MenuIcon />
-                </IconButton>
-                <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                    display: { xs: 'block', md: 'none' },
-                }}
-                >
-                {pages.map((page) => (
-                     <MenuItem key={page.name} onClick={handleCloseNavMenu} component="a" href={page.href}>
-                     {page.name}
-                   </MenuItem>
-                ))}
-                </Menu>
-            </Box>
-            
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                {pages.map((page) => (
-                <Button
-                    key={page.name}
-                    href={page.href}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                    {page.name}
-                </Button>
-                ))}
-            </Box>
+                                <Image
+                                    src="/imagenes/fill_blanco.png"
+                                    style={{ width: "100%", height: "auto" }}
+                                    alt="logo"
+                                    width={100}
+                                    height={100}
+                                    loading="lazy"
+                                />
+                            </Typography>
 
-            
-            </Toolbar>
-        </Container>
-        </AppBar>
+                            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+                                <IconButton
+                                    size="large"
+                                    aria-label="account of current user"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    onClick={handleOpenNavMenu}
+                                    color="inherit"
+                                >
+                                    <MenuIcon />
+                                </IconButton>
+                            </Box>
+
+                            <Typography
+                                variant="h5"
+                                noWrap
+                                component="a"
+                                href=""
+                                sx={{
+                                    mr: 2,
+                                    display: { xs: "flex", md: "none" },
+                                    flexGrow: 1,
+                                    fontFamily: "monospace",
+                                    fontWeight: 700,
+                                    letterSpacing: ".3rem",
+                                    color: "inherit",
+                                    textDecoration: "none",
+                                }}
+                            >
+                                {" "}
+
+                                <Image
+                                    src="/imagenes/fill_blanco.png"
+                                    style={{ width: "100%", height: "auto" }}
+                                    alt="logo"
+                                    width={100}
+                                    height={100}
+                                    loading="lazy"
+                                />
+                            </Typography>
+                            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+                                {isMatch ? (
+                                    <IconButton
+                                        size="large"
+                                        aria-label="account of current user"
+                                        aria-controls="menu-appbar"
+                                        aria-haspopup="true"
+                                        onClick={handleOpenNavMenu}
+                                        color="inherit"
+                                    >
+                                        <MenuIcon />
+                                    </IconButton>
+                                ) : (
+                                    <>
+                                        <Tabs centered sx={{ margin: "auto" }}>
+
+
+                                            <Tab
+                                                label={
+                                                    <Link
+                                                        href="/posts/About-Us"
+                                                        style={{
+                                                            textDecoration: "none",
+                                                            color: "white",
+                                                            opacity: "1",
+                                                        }}
+                                                    >
+                                                        <p>
+                                                            {" "}
+                                                            <InfoIcon /> {t("Conocenos")}
+                                                        </p>
+                                                    </Link>
+                                                }
+                                                className="Tab2 animate__animated animate__zoomIn"
+                                            >
+                                                {" "}
+                                            </Tab>
+
+
+
+                                            <Tab
+                                                value="three"
+                                                label={
+                                                    <p>
+                                                        <Link
+                                                            href="/project"
+                                                            style={{
+                                                                textDecoration: "none",
+                                                                color: "white",
+                                                            }}
+                                                        >
+                                                            <TimelineIcon /> {t("Nuestras Biciletas")}
+                                                        </Link>
+                                                    </p>
+                                                }
+                                                className="Tab3 animate__animated animate__zoomIn"
+                                            />
+
+
+                                            <Tab
+                                                value="one"
+                                                label={
+                                                    <p>
+                                                        <Home /> {t('¿Quiere Ayudar?')}
+                                                    </p>
+                                                }
+                                                onClick={() => {
+                                                    window.location.href = "/";
+                                                }}
+                                                style={{
+                                                    textDecoration: "none",
+                                                    color: "white",
+                                                }}
+                                                className="Tab1 animate__animated animate__zoomIn"
+                                            />
+                                        </Tabs>
+                                    </>
+                                )}
+                            </Box>
+
+                            <Box sx={{ flexGrow: 0 }}>
+
+                                <Menu
+                                    id="menu-appbar-avatar"
+                                    anchorEl={anchorElNav}
+                                    anchorOrigin={{
+                                        vertical: "bottom",
+                                        horizontal: "right",
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: "top", // Adjust to match the new position
+                                        horizontal: "right",
+                                    }}
+                                    open={Boolean(anchorElNav)}
+                                    onClose={handleCloseNavMenu}
+                                    sx={{
+                                        display: { xs: "block", md: "none" },
+                                    }}
+                                >
+                                    {/* <Drawer
+                    open={isDrawerOpen}
+                    onClose={() => setIsDrawerOpen(false)}
+                  > */}
+                                    <List className="DrawerList">
+                                        
+
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <InfoIcon />
+                                            </ListItemIcon>
+                                            <Link
+                                                href="/posts/About-US"
+                                                style={{ textDecoration: "none", color: "white" }}
+                                            >
+                                                <ListItemText
+                                                    onClick={handleCloseNavMenu}
+                                                    primary={"About Us"}
+                                                />{" "}
+                                            </Link>
+                                        </ListItemButton>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <TimelineIcon />
+                                            </ListItemIcon>
+                                            <Link
+                                                href="/project"
+                                                style={{ textDecoration: "none", color: "white" }}
+                                            >
+                                                <ListItemText
+                                                    onClick={handleCloseNavMenu}
+                                                    primary={"Nuestras Bicis"}
+                                                />
+                                            </Link>
+                                        </ListItemButton>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <Home />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"¿Quiere Ayudar?"}
+                                                onClick={() => {
+                                                    window.location.href = "/posts/Donaciones";
+                                                }}
+                                            />
+                                        </ListItemButton>
+                                    </List>
+                                </Menu>
+                            </Box>
+                        </Toolbar>
+                    </Container>
+                </AppBar>
+            </HideOnScroll>
+        </React.Fragment>
     );
-    }
-    export default ResponsiveAppBar;
+}
+export default ResponsiveAppBar;

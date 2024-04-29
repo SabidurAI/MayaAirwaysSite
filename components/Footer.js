@@ -1,3 +1,6 @@
+import React from 'react';
+import { useRouter } from 'next/router';
+
 const sunIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -77,6 +80,31 @@ const ThemeSwitcher = () => {
   );
 };
 
+const LocaleSwitcher = () => {
+  const router = useRouter();
+  const { locales, locale: activeLocale } = router;
+
+  const handleChangeLocale = (newLocale) => {
+    router.push(router.pathname, router.asPath, { locale: newLocale });
+  };
+
+  return (
+    <div className="flex mt-6 justify-center">
+      {locales.map((locale) => (
+        <button
+          key={locale}
+          type="button"
+          className={`mx-2 p-2 text-sm rounded ${
+            locale === activeLocale ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
+          }`}
+          onClick={() => handleChangeLocale(locale)}
+        >
+          {locale.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  );
+};
 export default function Footer({ copyrightText }) {
   return (
     <footer className="py-16 flex flex-col items-center">
@@ -84,6 +112,7 @@ export default function Footer({ copyrightText }) {
         {copyrightText}
         <a href="https://linktr.ee/maya_airways">Maya Airways</a>
       </p>
+      <LocaleSwitcher />
       <ThemeSwitcher />
     </footer>
   );
