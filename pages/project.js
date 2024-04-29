@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Layout, { GradientBackground } from '../components/Layout';
 import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
+import Image from 'next/image';
 
 export default function ProjectsPage() {
   const globalData = getGlobalData()
@@ -14,14 +15,22 @@ export default function ProjectsPage() {
       {/**<h1>Lo que hemos hecho hasta ahora</h1>*/}
       Bicicletas armadas hasta ahora
       <br />
-      <img src="/imagenes/proj.jpg" alt="Bici de frente" />
+      <Image 
+      src="/imagenes/proj.jpg" 
+      alt="Bici de frente" 
+      width={1000}
+      height={1000}
+      />
       Hay tres series de bicicletas:
       <ul>
         <li><b>Bourdieu:</b> bicicletas armadas con repuestos nuevos.</li>
         <li><b>Fénix:</b> bicicletas restauradas (según el caso, con repuestos usados y nuevos).</li>
         <li><b>Wollstonecraft:</b> bicicletas armadas con piezas usadas (y algunas nuevas).</li>
       </ul>
-      <img src="/imagenes/actual.png" alt="colage de bicicletas" />
+      <Image src="/imagenes/actual.png" alt="colage de bicicletas" 
+      width={1000}
+      height={1000}
+      />
       <a href="https://www.flickr.com/photos/sabidurai/albums">Colección fotográfica completa acá</a> -
       <a href="https://bit.ly/maya-air-photos">https://bit.ly/maya-air-photos</a>
       <br />

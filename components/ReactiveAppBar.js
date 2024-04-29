@@ -205,7 +205,7 @@ function ResponsiveAppBar(props) {
                                                     </p>
                                                 }
                                                 onClick={() => {
-                                                    window.location.href = "/posts/Donaciones";
+                                                    window.location.href = "/posts/Donations";
                                                 }}
                                                 style={{
                                                     textDecoration: "none",
